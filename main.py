@@ -1,0 +1,24 @@
+# built with tutorial: https://codeburst.io/building-your-first-chat-application-using-flask-in-7-minutes-f98de4adfa5d
+# Note: socket.io version from tutorial is incompatable and you will need to find the latest version from the socket.io CDN.
+
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = "abc123!"
+socketio = SocketIO(app)
+
+@app.route('/')
+def sessions():
+    return render_template('chat.html')
+
+def messageReceived(methods=['GET', 'POST']):
+    print("Message Received!")
+
+@socketio.on('my event')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response', json, callback=messageReceived)
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
