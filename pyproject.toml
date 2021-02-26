@@ -2,7 +2,7 @@
 name = "hello-websockets"
 version = "0.1.0"
 description = "a hello world for websockets built on flask"
-authors = ["Kyle Cole <kcole@aveshka.com>"]
+authors = ["Kyle Cole <>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
